@@ -12,6 +12,6 @@ server
     .use(views(path.join(__dirname)))
     .use(serve('dist'))
     .use(router.routes())
-    .listen(4444, () => {
+    .listen(3525, () => {
       console.log('listening...')
     })
