@@ -4,10 +4,11 @@ const path = require('path')
 const views = require('koa-views')
 const router = require('koa-router')()
 
-router.get('/', async ctx => {
+router.get('*', async ctx => {
     await ctx.render('index')
-    console.log(ctx.status)
 })
+
+
 
 server
     .use(views(path.join(__dirname)))
