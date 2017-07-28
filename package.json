@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --open",
     "build": "webpack -p",
-    "serve": "node server.js"
+    "servee": "node server.js"
   },
   "author": "",
   "license": "ISC",
