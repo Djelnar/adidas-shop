@@ -8,6 +8,9 @@ export const Aside = styled.aside`
   align-items: center;
   justify-content: flex-start;
   overflow-y: scroll;
+  @media (max-width: 768px) {
+    overflow-y: auto;
+  }
 `
 
 export const Main = styled.main`
@@ -17,6 +20,9 @@ export const Main = styled.main`
   // flex-direction: row;
   // align-items: flex-start;
   overflow-y: scroll;
+  @media (max-width: 768px) {
+    overflow-y: auto;
+  }
 `
 
 export const Wrapper = styled.div`
@@ -26,6 +32,13 @@ export const Wrapper = styled.div`
   align-items: stretch;
   overflow: hidden;
   height: 100vh;
+
+  @media (max-width: 768px) {
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+  }
 `
 
 export const Logo = styled.a`

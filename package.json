@@ -22,7 +22,9 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
-    "styled-components": "^2.1.1"
+    "styled-components": "^2.1.1",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -36,8 +38,6 @@
     "postcss-loader": "^2.0.6",
     "postcss-nested": "^2.0.2",
     "postcss-nested-props": "^1.1.7",
-    "style-loader": "^0.18.2",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+    "style-loader": "^0.18.2"
   }
 }

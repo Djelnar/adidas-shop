@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import search from './../img/search.svg'
+import searchFocused from './../img/search--focused.svg'
 
 export const Row = styled.div`
   display: flex;
@@ -43,7 +44,11 @@ export const SearchBar = styled.input.attrs({
   margin: 1em 10px 2em;
   background: url(${search}) 10px 0 no-repeat;
   transition: all 0.3s ease;
+  &::before {
+    content: url(${search}) url(${searchFocused});
+  }
   &:focus {
     border-color: #373737;
+    background: url(${searchFocused}) 10px 0 no-repeat;
   }
 `

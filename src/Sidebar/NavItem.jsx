@@ -52,6 +52,11 @@ export default class NavItem extends Component {
       isActive: !this.state.isActive
     }) 
   }
+  toggleActiveDefault = () => {
+    this.setState({
+      isActive: !this.state.isActive
+    }) 
+  }
   render() {
     return (
       <StyledNavItem>
@@ -64,7 +69,10 @@ export default class NavItem extends Component {
           (<div className="options">
             {this.props.options.map((el, idx) => {
               return (
-                <Link key={idx} className="option" to={ `/products/${this.props.title}/${el}` }>{el.toUpperCase()}</Link>
+                <Link key={idx}
+                      className="option"
+                      onClick={ this.toggleActiveDefault }
+                      to={ `/products/${this.props.title}/${el}` }>{el.toUpperCase()}</Link>
               )
           })} 
           </div>) : null
