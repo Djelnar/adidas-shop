@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import Gallery from './Gallery.jsx'
 import { get, imageLink } from './../Api'
 import { connect } from 'react-redux'
+import getItem from '../actions/getItem'
+import { Loading } from './../style'
 
 const Item = styled.div`
   padding-bottom: 96px;
@@ -57,58 +59,67 @@ const Item = styled.div`
   }
 `
 
-export default class Show extends Component {
+class Show extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      product: {
-        id: null
-      },
-      images: [],
-      isFetching: true
-    }
   }
   fetchData(props) {
     const { group, type, id } = props.match.params
-    
-    get(`v1/products/${group}/${type}/${id}`)
-      .then(data => this.setState({
-        product: data,
-        images: data.images.map((el, idx) => {
-          return imageLink(el.id, el.fileName, 160)
-        }),
-        isFetching: false
-      }))
-  }
-  addToCart = e => {
-    const payload = this.state.product.id
-    // this.props.onAddToCart(payload)
+    if (id !== this.props.match.params.id) {
+      this.props.onFetchItem(group, type, id)
+    }
   }
   componentDidMount() {
     this.fetchData(this.props)
+    const { group, type, id } = this.props.match.params
+    this.props.onFetchItem(group, type, id)
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({isFetching: true})
     this.fetchData(nextProps)
   }
   shouldComponentUpdate(np, ns) {
-    return ns.product.id !== this.state.product.id
+    return np.product.id !== this.props.product.id
   }
-  render() {
-    const { title, price, currency, sizes, description } = this.state.product
+  renderItem() {
+    const { title, price, currency, sizes, description } = this.props.product
     let newPrice = '000'
-    if(price) {
+    if (price) {
       const priceStr = price.toString(10)
-      newPrice = priceStr.slice(0, -2) + '.' + priceStr.slice(-2) 
+      newPrice = priceStr.slice(0, -2) + '.' + priceStr.slice(-2)
     }
     return (
       <Item>
-        <Gallery images={this.state.images} />
-        <h1>{ title }</h1>
-        <p className="price" >{ newPrice } { currency }</p>
-        <p className="desc" >{ description }</p>
-        <button onClick={this.addToCart} className="buybtn">add to cart</button>
+        <Gallery images={this.props.images} />
+        <h1>{title}</h1>
+        <p className="price" >{newPrice} {currency}</p>
+        <p className="desc" >{description}</p>
+        {/* <button onClick={this.addToCart} className="buybtn">add to cart</button> */}
       </Item>
     )
   }
+  render() {
+    const { isFetching, isError } = this.props
+    return (
+      <div>
+        {(isError || isFetching) ?
+        <Loading>Loading...</Loading> :
+        this.renderItem() }
+      </div>
+    )
+  }
 }
+
+const mapStateToProps = store => ({
+  isFetching: store.getItem.isFetching,
+  isError: store.getItem.isError,
+  product: store.getItem.product,
+  images: store.getItem.images,
+})
+
+const mapDispatchToProps = dispatch => ({
+  onFetchItem: (group, type, id) => {
+    dispatch(getItem(group, type, id))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Show)

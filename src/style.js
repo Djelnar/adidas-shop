@@ -111,16 +111,26 @@ export const Spinner = styled.div`
   width: 100%;
   height: 100%;
   z-index: 999;
+  text-align: center;
   background-color: #000;
   box-shadow: 0px 0px 0px 4px rgba(0,0,0,1);
-  &:after {
+  &:after, &:before {
+    text-align: center;
     content: '+';
-    font-size: 32px;
+    font-size: 42px;
+    font-stretch: normal;
+    width: 42px;
+    line-height: 1;
     color: #fff;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: calc(50% - 21px);
     animation: rotating 2s linear infinite;
+  }
+  &:after {
+    right: calc(50% - 44px);
+    transform: rotate(45deg);
+  }
+  &:before {
+    left: calc(50% - 44px);
   }
 `

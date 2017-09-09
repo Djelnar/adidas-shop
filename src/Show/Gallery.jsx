@@ -55,7 +55,10 @@ export default class Gallery extends Component {
     }
   }
   componentDidMount() {
-    
+    this.setState({
+      pics: this.props.images,
+      shown: this.props.images[0]
+    })
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -70,7 +73,7 @@ export default class Gallery extends Component {
   }
   render() {
     const { shown, pics } = this.state || null
-    const pre = [1,2,3,4,5,6,7,8]
+    const pre = [...Array(10).keys()]
     return (
       <GalleryDiv>
         <div className="mainview">

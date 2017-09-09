@@ -62,8 +62,9 @@ export default class NavItem extends Component {
       <StyledNavItem>
         <a href="#" className="title" onClick={ this.toggleActive }>
           <p>{ this.props.title.toUpperCase() }</p>
-          <img style={this.state.isActive ? {transform: 'rotate(180deg)'} : null}
-           src={toggleImg} className="toggle" alt=""/>
+          <img
+            style={this.state.isActive ? {transform: 'rotate(180deg)'} : null}
+            src={toggleImg} className="toggle" alt=""/>
         </a>
         {(this.state.isActive && this.props.options) ? 
           (<div className="options">
@@ -72,7 +73,9 @@ export default class NavItem extends Component {
                 <Link key={idx}
                       className="option"
                       onClick={ this.toggleActiveDefault }
-                      to={ `/products/${this.props.title}/${el}` }>{el.toUpperCase()}</Link>
+                      to={ `/products/${this.props.title}/${el}` }>
+                      {el.toUpperCase()}
+                </Link>
               )
           })} 
           </div>) : null

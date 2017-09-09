@@ -42,6 +42,7 @@ module.exports = {
         historyApiFallback: true,
 		proxy: {
       "/login": "http://localhost:3525"
-		}
+		},
+    host: '192.168.0.103',
     }
 }

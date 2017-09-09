@@ -47,13 +47,21 @@ class LoginForm extends Component {
       password
     }
     this.props.onLogin(data)
+    this.login.value = ''
+    this.password.value = ''
   }
   render() {
     const { isAwaitLogin } = this.props
     return (
-      <Form error={this.props.error} onSubmit={this.submitLogin} >
-        <input type="text" placeholder="login (any)" ref={n => this.login = n} />
-        <input type="password" placeholder="password (1234)" ref={n => this.password = n} />
+      <Form error={this.props.error} onSubmit={this.submitLogin}>
+        <input type="text"
+                placeholder="login (any)"
+                ref={n => this.login = n}
+                required="required" />
+        <input type="password"
+                placeholder="password (1234)"
+                ref={n => this.password = n}
+                required="required" />
         <button type="submit">Sign in</button>
         { isAwaitLogin ? <Spinner /> : null }
       </Form>
