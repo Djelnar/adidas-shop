@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { White } from './../style'
+import { White } from '../style'
 
 export default class CartLabel extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export default class CartLabel extends Component {
     return (
       <div>
         <White>
-          there be a cart
+          
         </White>
       </div>
     )

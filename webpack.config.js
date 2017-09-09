@@ -9,13 +9,13 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?/i,
+                test: /\.jsx?$/,
                 loader: 'babel-loader',
                 options: {
                     presets: [
-						"es2015", "react"
-					],
-                    plugins: ["transform-class-properties"]
+                      "es2015", "react"
+                    ],
+                    plugins: ["transform-class-properties", "transform-object-rest-spread"],
                 }
             },
 			{
@@ -41,7 +41,7 @@ module.exports = {
         compress: true,
         historyApiFallback: true,
 		proxy: {
-		
+      "/login": "http://localhost:3525"
 		}
     }
 }

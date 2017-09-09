@@ -45,7 +45,7 @@ export const SearchBar = styled.input.attrs({
   background: url(${search}) 10px 0 no-repeat;
   transition: all 0.3s ease;
   &::before {
-    content: url(${search}) url(${searchFocused});
+    content: url(${searchFocused});
   }
   &:focus {
     border-color: #373737;

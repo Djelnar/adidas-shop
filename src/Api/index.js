@@ -11,10 +11,10 @@ export const post = (url, data) =>
     body: JSON.stringify(data),
   }).then(r => r.json())
 
-  export const imageLink = (id, fileName, height) =>
+export const imageLink = (id, fileName, height) =>
   `http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/${id}/zoom/${fileName}?sh=${height}`
 
-  export const groups = [
+export const groups = [
   {
     group: 'football',
     types: [

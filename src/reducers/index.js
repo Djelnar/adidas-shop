@@ -1,9 +1,7 @@
-const reducerInitialState = {
+import { combineReducers } from 'redux'
 
-}
-export default (state = reducerInitialState, action) => {
-  switch (action.type) {
-    default:
-      return state
-  }
-}
+import loginlogout from './loginlogout'
+
+export default combineReducers({
+  loginlogout
+})

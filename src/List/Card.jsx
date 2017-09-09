@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -35,19 +35,9 @@ const PriceLink = styled(Link)`
   }
 `
 
-export default class Card extends Component {
-  constructor(props) {
-    super(props)
-  }
-  render() {
-    return (
-      <StyledCard bgc="#f4f4f4" >
-        <h2 className="title" >{this.props.title}</h2>
-        <img src={this.props.pic} alt=""/>
-        <PriceLink to={this.props.to} >${this.props.price}</PriceLink>
-      </StyledCard>
-    )
-  }
-}
-
-// background-color: ${props => props.bgc || '#fff'};
+export default props => 
+  <StyledCard bgc="#f4f4f4" >
+    <h2 className="title" >{props.title}</h2>
+    <img src={props.pic} alt="" />
+    <PriceLink to={props.to} >${props.price}</PriceLink>
+  </StyledCard>

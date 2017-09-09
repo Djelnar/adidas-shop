@@ -16,9 +16,6 @@ export const Aside = styled.aside`
 export const Main = styled.main`
   background-color: #fff;
   flex: 0 0 70%;
-  // display: flex;
-  // flex-direction: row;
-  // align-items: flex-start;
   overflow-y: scroll;
   @media (max-width: 768px) {
     overflow-y: auto;
@@ -44,8 +41,7 @@ export const Wrapper = styled.div`
 export const Logo = styled.a`
   max-width: 100px;
   display: block;
-  overflow: hidden;
-  margin: 64px auto 128px;
+  margin: 64px auto;
   height: 68px;
   flex-shrink: 0.00000001;
   & img {
@@ -71,4 +67,31 @@ export const White = styled.p`
   color: #fff;
   font-weight: 400;
   font-size: 24px;
+`
+
+export const Center  = styled.div`
+  text-align: center;
+`
+
+export const WhiteButton = styled.button.attrs({
+  type: props => props.type || 'button',
+  onClick: props => props.onClick || null
+})`
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-stretch: condensed;
+  display: block;
+  width: 100%;
+  border: 2px solid #fff;
+  background-color: #000;
+  color: #fff;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 6px;
+  cursor: pointer;
+  transition: all .2s ease;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
 `
