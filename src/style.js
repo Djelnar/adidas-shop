@@ -95,3 +95,32 @@ export const WhiteButton = styled.button.attrs({
     color: #000;
   }
 `
+
+export const Spinner = styled.div`
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: #000;
+  box-shadow: 0px 0px 0px 4px rgba(0,0,0,1);
+  &:after {
+    content: '+';
+    font-size: 32px;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotating 2s linear infinite;
+  }
+`

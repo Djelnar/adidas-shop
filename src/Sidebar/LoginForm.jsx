@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import login from '../actions/login'
-
+import { Spinner } from '../style'
 const Form = styled.form.attrs({
   onSubmit: props => props.onSubmit
 })`
+  position: relative;
   & * {
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
@@ -48,18 +49,20 @@ class LoginForm extends Component {
     this.props.onLogin(data)
   }
   render() {
+    const { isAwaitLogin } = this.props
     return (
       <Form error={this.props.error} onSubmit={this.submitLogin} >
         <input type="text" placeholder="login (any)" ref={n => this.login = n} />
         <input type="password" placeholder="password (1234)" ref={n => this.password = n} />
         <button type="submit">Sign in</button>
+        { isAwaitLogin ? <Spinner /> : null }
       </Form>
     )
   }
 }
 
 const mapStateToProps = store => ({
-  store
+  isAwaitLogin: store.loginlogout.isAwaitLogin,
 })
 
 const mapDispatchToProps = dispatch => ({

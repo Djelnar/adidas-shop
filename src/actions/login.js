@@ -1,4 +1,7 @@
 export default (data) => dispatch => {
+  dispatch({
+    type: 'AWAIT_LOGIN'
+  })
   const url = '/login'
   fetch(url, {
     method: 'POST',
