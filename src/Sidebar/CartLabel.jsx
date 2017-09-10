@@ -1,19 +1,37 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { White } from '../style'
 
-export default class CartLabel extends Component {
-  constructor(props) {
-    super(props)
+const WhiteHover = White.extend`
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+    color: #fff;
   }
-  render() {
-    return (
-      <div>
-        <White>
-          
-        </White>
-      </div>
-    )
-  }
-}
+`
+
+const CartLabel = props =>
+  <div>
+    <White>
+      {props.count} items, ${props.total} in total
+    </White>
+    <Link to="/cart" style={{
+      color: '#fff',
+      textDecoration: 'none'
+    }}  ><WhiteHover>Cart</WhiteHover></Link>
+  </div>
+
+const mapStateToProps = state => ({
+  count: Object.values(state.cart.quantityById)
+                  .reduce((a, v) => a + (v || 0), 0),
+  total: state.cart.addedIds.map((v, i) => {
+    return v.cost * state.cart.quantityById[v.productId]
+  }).reduce((a, v) => a + v, 0)
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartLabel)

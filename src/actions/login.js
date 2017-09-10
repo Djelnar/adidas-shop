@@ -12,5 +12,7 @@ export default (data) => dispatch => {
   }).then(r => r.json())
     .then(r => dispatch({
       ...r
+    })).catch(e => dispatch({
+      type: 'LOGIN_FAILURE'
     }))
 }

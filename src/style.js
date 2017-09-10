@@ -67,6 +67,7 @@ export const White = styled.p`
   color: #fff;
   font-weight: 400;
   font-size: 24px;
+  margin-bottom: 20px;
 `
 
 export const Center  = styled.div`

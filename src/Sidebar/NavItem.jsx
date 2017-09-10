@@ -12,7 +12,7 @@ const StyledNavItem = styled.div`
 
   & .title {
     display: flex;
-    width: 100%
+    width: 100%;
     flex-firection: row;
     align-items: center;
     cursor: pointer;

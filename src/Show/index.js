@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Gallery from './Gallery.jsx'
 import { get, imageLink } from './../Api'
 import { connect } from 'react-redux'
+import cartAdd from '../actions/cartAdd'
 import getItem from '../actions/getItem'
 import { Loading } from './../style'
 
@@ -81,19 +82,23 @@ class Show extends Component {
     return np.product.id !== this.props.product.id
   }
   renderItem() {
-    const { title, price, currency, sizes, description } = this.props.product
+    const { title, price, currency, description } = this.props.product
     let newPrice = '000'
     if (price) {
       const priceStr = price.toString(10)
       newPrice = priceStr.slice(0, -2) + '.' + priceStr.slice(-2)
     }
+    const { group, type, id } = this.props.match.params
     return (
       <Item>
         <Gallery images={this.props.images} />
         <h1>{title}</h1>
         <p className="price" >{newPrice} {currency}</p>
         <p className="desc" >{description}</p>
-        {/* <button onClick={this.addToCart} className="buybtn">add to cart</button> */}
+        <button
+        onClick={_ =>
+        this.props.onAdd(`/products/${group}/${type}/${id}`, title, newPrice)}
+        className="buybtn">add to cart</button>
       </Item>
     )
   }
@@ -119,6 +124,9 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   onFetchItem: (group, type, id) => {
     dispatch(getItem(group, type, id))
+  },
+  onAdd: (productId, title, cost) => {
+    dispatch(cartAdd(productId, title, cost))
   }
 })
 

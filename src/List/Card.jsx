@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import cartAdd from '../actions/cartAdd'
+import { WhiteButton } from '../style'
 
 const StyledCard = styled.div`
   background-color: ${props => props.bgc || '#fff'};
@@ -35,9 +38,22 @@ const PriceLink = styled(Link)`
   }
 `
 
-export default props => 
+const Card = props => 
   <StyledCard bgc="#f4f4f4" >
     <h2 className="title" >{props.title}</h2>
+    <WhiteButton
+      onClick={_ => { props.onAdd(props.to, props.title, props.price) }}
+    >add to cart</WhiteButton>
     <img src={props.pic} alt="" />
     <PriceLink to={props.to} >${props.price}</PriceLink>
   </StyledCard>
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = dispatch => ({
+  onAdd: (productId, title, cost) => {
+    dispatch(cartAdd(productId, title, cost))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card)
