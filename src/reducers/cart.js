@@ -1,6 +1,7 @@
 const initialState = {
   addedIds: [],
   quantityById: {},
+  thanks: false
 }
 
 const addedIds = (state = initialState.addedIds, action) => {
@@ -54,6 +55,11 @@ const quantityById = (state = initialState.quantityById, action) => {
 
 const cart = (state = initialState, action) => {
   switch (action.type) {
+    case 'ERASE':
+      return {
+        ...initialState,
+        thanks: true
+      }
     default:
       return {
         addedIds: addedIds(state.addedIds, action),

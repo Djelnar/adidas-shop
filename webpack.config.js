@@ -41,7 +41,9 @@ module.exports = {
         compress: true,
         historyApiFallback: true,
 		proxy: {
-      "/login": "http://localhost:3525"
+      "/login": "http://localhost:3525",
+      "/checkhour": "http://localhost:3525",
+      "/trycheckout": "http://localhost:3525",
 		},
     host: '192.168.0.103',
     }

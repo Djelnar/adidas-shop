@@ -5,6 +5,7 @@ import { White } from '../style'
 
 const WhiteHover = White.extend`
   text-decoration: none;
+  text-align: center;
   &:hover {
     text-decoration: underline;
     color: #fff;

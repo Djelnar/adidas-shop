@@ -40,6 +40,63 @@ router.post('/login', bodyParser(), async ctx => {
   }
 })
 
+const checkTime = hour => {
+  return new Promise((resolve, reject) => {
+    if (hour >= 10 && hour <= 20) {
+      setTimeout(_ => {
+        resolve(hour)
+      }, 1000)
+    } else {
+      setTimeout(_ => {
+        reject(hour)
+      }, 1000)
+    }
+  })
+}
+
+router.post('/checkhour', bodyParser(), async ctx => {
+  const { hour } = ctx.request.body
+  try {
+    const h = await checkTime(hour)
+    ctx.status = 200
+    ctx.body = {
+      type: 'DELIVERY_POSSIBLE',
+      hour: h
+    }
+  } catch (e) {
+    ctx.status = 200
+    ctx.body = {
+      type: 'DELIVERY_IMPOSSIBLE'
+    }
+  }
+})
+
+const isCheckoutPossible = (total) => {
+  return new Promise((resolve, reject) => {
+    if (total > 1000) {
+      resolve(total)
+    } else {
+      reject(1000 - total)
+    }
+  })
+}
+
+router.post('/trycheckout', bodyParser(), async ctx => {
+  const { total } = ctx.request.body
+  try {
+    const s = await isCheckoutPossible(total)
+    ctx.status = 200
+    ctx.body = {
+      type: 'CHECKOUT_POSSIBLE'
+    }
+  } catch (e) {
+    ctx.status = 200
+    ctx.body = {
+      type: 'CHECKOUT_SPECIAL',
+      rest: e
+    }
+  }
+})
 
 server
   .use(views(path.join(__dirname)))

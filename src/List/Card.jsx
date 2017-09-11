@@ -41,11 +41,11 @@ const PriceLink = styled(Link)`
 const Card = props => 
   <StyledCard bgc="#f4f4f4" >
     <h2 className="title" >{props.title}</h2>
+    <img src={props.pic} alt="" />
+    <PriceLink to={props.to} >${props.price}</PriceLink>
     <WhiteButton
       onClick={_ => { props.onAdd(props.to, props.title, props.price) }}
     >add to cart</WhiteButton>
-    <img src={props.pic} alt="" />
-    <PriceLink to={props.to} >${props.price}</PriceLink>
   </StyledCard>
 
 const mapStateToProps = state => ({})

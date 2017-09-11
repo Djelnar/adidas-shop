@@ -69,6 +69,12 @@ export const White = styled.p`
   font-size: 24px;
   margin-bottom: 20px;
 `
+export const Red = White.extend`
+  color: #f00;
+`
+export const Green = White.extend`
+  color: #0f0;
+`
 
 export const Center  = styled.div`
   text-align: center;
@@ -76,7 +82,8 @@ export const Center  = styled.div`
 
 export const WhiteButton = styled.button.attrs({
   type: props => props.type || 'button',
-  onClick: props => props.onClick || null
+  onClick: props => props.onClick || null,
+  disabled: props => props.disabled,
 })`
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
@@ -89,11 +96,25 @@ export const WhiteButton = styled.button.attrs({
   margin-top: 16px;
   margin-bottom: 16px;
   padding: 6px;
-  cursor: pointer;
   transition: all .2s ease;
-  &:hover {
+  &:disabled {
+    cursor: wait;
+    opacity: .7;
+  }
+  &:not(:disabled):hover {
     background-color: #fff;
     color: #000;
+    cursor: pointer;
+  }
+`
+export const GreenButton = WhiteButton.extend`
+  border: 2px solid #0f0;
+  background-color: #0f0;
+  color: #fff;
+  &:not(:disabled):hover {
+    border-color: #fff;
+    background-color: #fff;
+    color: #0f0;
   }
 `
 
@@ -129,7 +150,6 @@ export const Spinner = styled.div`
   }
   &:after {
     right: calc(50% - 44px);
-    transform: rotate(45deg);
   }
   &:before {
     left: calc(50% - 44px);
