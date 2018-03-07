@@ -3,12 +3,13 @@ const initialState = {
   isAwaitHours: false,
   hour: null,
 }
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'AWAIT_HOURS':
       return {
         ...state,
-        isAwaitHours: true
+        isAwaitHours: true,
       }
     case 'DELIVERY_IMPOSSIBLE':
       return {
@@ -20,7 +21,7 @@ export default (state = initialState, action) => {
     case 'DELIVERY_POSSIBLE':
       return {
         ...initialState,
-        hour: action.hour
+        hour: action.hour,
       }
     default:
       return state

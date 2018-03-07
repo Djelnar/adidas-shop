@@ -1,0 +1,10 @@
+{
+  "extends": "@atomix/eslint-config-react",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "rules": {
+    "unicorn/filename-case": 0
+  }
+}

@@ -2,8 +2,9 @@ const initialState = {
   product: {},
   images: [],
   isFetching: true,
-  isError: false
+  isError: false,
 }
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'AWAIT_ITEM':

@@ -4,12 +4,13 @@ const initialState = {
   isAwaitLogin: false,
   login: null,
 }
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'AWAIT_LOGIN':
       return {
         ...state,
-        isAwaitLogin: true
+        isAwaitLogin: true,
       }
     case 'LOGIN_SUCCESS':
       return {
@@ -27,7 +28,7 @@ export default (state = initialState, action) => {
       }
     case 'LOGOUT':
       return {
-        ...initialState
+        ...initialState,
       }
     default:
       return state

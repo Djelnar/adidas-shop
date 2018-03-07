@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+
 export const Aside = styled.aside`
   background-color: #000;
   flex: 0 0 30%;
@@ -51,7 +52,6 @@ export const Logo = styled.a`
 `
 
 
-
 export const Loading = styled.h1`
   line-height: calc(100vh - 132px);
   width: 100%;
@@ -76,14 +76,14 @@ export const Green = White.extend`
   color: #0f0;
 `
 
-export const Center  = styled.div`
+export const Center = styled.div`
   text-align: center;
 `
 
 export const WhiteButton = styled.button.attrs({
-  type: props => props.type || 'button',
-  onClick: props => props.onClick || null,
-  disabled: props => props.disabled,
+  type: (props) => props.type || 'button',
+  onClick: (props) => props.onClick || null,
+  disabled: (props) => props.disabled,
 })`
   font-size: 20px;
   font-family: 'Roboto', sans-serif;

@@ -1,4 +1,4 @@
-export default (productId) => dispatch => {
+export default (productId) => (dispatch) => {
   dispatch({
     type: 'CART_REMOVE',
     productId,

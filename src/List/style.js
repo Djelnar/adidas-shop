@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import search from './../img/search.svg'
 import searchFocused from './../img/search--focused.svg'
 
+
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
@@ -13,7 +14,7 @@ export const Row = styled.div`
 export const Col = styled.div`
   flex: 0 0 33.33333333%;
   padding: 0 10px;
-  background-color: ${props => props.bgc || '#fff'};
+  background-color: ${(props) => props.bgc || '#fff'};
   margin-bottom: 20px;
   @media (max-width: 1200px) {
     flex: 0 0 50%;
@@ -29,7 +30,7 @@ export const Col = styled.div`
   }
 `
 export const SearchBar = styled.input.attrs({
-  type: 'text'
+  type: 'text',
 })`
   border: none;
   outline: none;

@@ -6,30 +6,29 @@ import {connect} from 'react-redux'
 import {Helmet} from 'react-helmet'
 
 
-const Sidebar = props => {
+const Sidebar = (props) => {
   const { isLogged, login, isError } = props
+
   return (
     <nav>
       <Helmet>
         <title>{ isLogged ? `Shop | ${login}` : 'Shop' }</title>
       </Helmet>
       { isLogged ? <LoginLabel username={login} /> : <LoginForm error={isError} /> }
-      {props.groups.map((el, idx) => {
-        return (
-          <NavItem key={idx} title={el.group} options={el.types} />
-        )
-      })}
+      {props.groups.map((el, idx) => (
+        <NavItem key={idx} title={el.group} options={el.types} />
+        ))}
     </nav>
   )
 }
 
-const mapStateToProps = store => ({
+const mapStateToProps = (store) => ({
   isLogged: store.loginlogout.isLogged,
   isError: store.loginlogout.isError,
   login: store.loginlogout.login,
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
 
 })
 

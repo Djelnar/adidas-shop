@@ -7,10 +7,9 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import reducer from './reducers'
 
+
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
-render(
-  <Provider store={store} >
-    <Adidas />
-  </Provider>,  document.querySelector('#root')
-)
+render(<Provider store={store} >
+  <Adidas />
+       </Provider>, document.querySelector('#root'))

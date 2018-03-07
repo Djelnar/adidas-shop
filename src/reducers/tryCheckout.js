@@ -3,14 +3,15 @@ const initialState = {
   isAwaitCheckout: false,
   canProceed: false,
   isSpecial: false,
-  rest: 0
+  rest: 0,
 }
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'AWAIT_CHECKOUT_TRY':
       return {
         ...state,
-        isAwaitCheckout: true
+        isAwaitCheckout: true,
       }
     case 'CHECKOUT_ERROR':
       return {

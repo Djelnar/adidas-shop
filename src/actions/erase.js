@@ -1,5 +1,5 @@
-export default () => dispatch => {
+export default () => (dispatch) => {
   dispatch({
-    type: 'ERASE'
+    type: 'ERASE',
   })
 }

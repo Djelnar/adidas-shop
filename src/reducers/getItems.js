@@ -3,6 +3,7 @@ const initialState = {
   isFetching: true,
   isError: false,
 }
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'AWAIT_LIST':
@@ -12,7 +13,7 @@ export default (state = initialState, action) => {
     case 'GOT_LIST':
       return {
         products: action.products,
-        isFetching: false
+        isFetching: false,
       }
     case 'ERROR_LIST':
       return {
