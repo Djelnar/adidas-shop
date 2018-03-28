@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
 import NavItem from './NavItem.jsx'
 import LoginForm from './LoginForm.jsx'
 import LoginLabel from './LoginLabel.jsx'
-import {connect} from 'react-redux'
-import {Helmet} from 'react-helmet'
 
 
 const Sidebar = (props) => {
@@ -12,12 +12,12 @@ const Sidebar = (props) => {
   return (
     <nav>
       <Helmet>
-        <title>{ isLogged ? `Shop | ${login}` : 'Shop' }</title>
+        <title>{isLogged ? `Shop | ${login}` : 'Shop'}</title>
       </Helmet>
-      { isLogged ? <LoginLabel username={login} /> : <LoginForm error={isError} /> }
-      {props.groups.map((el, idx) => (
-        <NavItem key={idx} title={el.group} options={el.types} />
-        ))}
+      {isLogged ? <LoginLabel username={login} /> : <LoginForm error={isError} />}
+      {props.groups.map(({ group, types }) => (
+        <NavItem key={group} title={group} options={types} />
+      ))}
     </nav>
   )
 }
@@ -28,8 +28,4 @@ const mapStateToProps = (store) => ({
   login: store.loginlogout.login,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)
+export default connect(mapStateToProps)(Sidebar)

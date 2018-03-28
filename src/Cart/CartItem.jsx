@@ -6,6 +6,7 @@ import cartDecrease from '../actions/cartDecrease'
 import cartRemove from '../actions/cartRemove'
 import { Link } from 'react-router-dom'
 
+
 const Block = styled.div`
   border-radius: 20px;
   padding: 20px;
@@ -41,36 +42,42 @@ const Block = styled.div`
   }
 `
 
-const CartItem = props =>
-  <Block>
-    <Link to={props.productId} >
-      <p className="title">{props.title}, ${props.total}</p>
-    </Link>
-    <button
+const CartItem = (props) => (<Block>
+  <Link to={props.productId} >
+    <p className="title">{props.title}, ${props.total}</p>
+  </Link>
+  <button
     className="ctrl"
-    onClick={_ => { props.onDecrease(props.productId) }}
-     >-</button>
-    <span className="title">{props.count}</span>
-    <button
+    onClick={(_) => {
+ props.onDecrease(props.productId)
+}}
+  >-
+  </button>
+  <span className="title">{props.count}</span>
+  <button
     className="ctrl"
-    onClick={_ => { props.onAdd(props.productId, props.title, props.cost) }}
-    >+</button>
-    <button
+    onClick={(_) => {
+ props.onAdd(props.productId, props.title, props.cost)
+}}
+  >+
+  </button>
+  <button
     className="remove"
-    onClick={_ => { props.onRemove(props.productId) }}
-    >remove</button>
-  </Block>
+    onClick={(_) => {
+ props.onRemove(props.productId)
+}}
+  >remove
+  </button>
+</Block>)
 
-const mapStateToProps = state => ({
-  items: state.cart.addedIds.map((v, i) => {
-    return {
-      ...v,
-      count: state.cart.quantityById[v.productId]
-    }
-  })
+const mapStateToProps = (state) => ({
+  items: state.cart.addedIds.map((v, i) => ({
+    ...v,
+    count: state.cart.quantityById[v.productId],
+  })),
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onAdd: (productId, title, cost) => {
     dispatch(cartAdd(productId, title, cost))
   },
@@ -79,7 +86,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onDecrease: (productId, title, cost) => {
     dispatch(cartDecrease(productId, title, cost))
-  }
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartItem)

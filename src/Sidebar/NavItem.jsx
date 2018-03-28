@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import toggleImg from './../img/toggle.svg'
 import { Link } from 'react-router-dom'
+import toggleImg from './../img/toggle.svg'
+
 
 const StyledNavItem = styled.div`
   font-family: 'Roboto', sans-serif;
@@ -13,7 +14,7 @@ const StyledNavItem = styled.div`
   & .title {
     display: flex;
     width: 100%;
-    flex-firection: row;
+    flex-direction: row;
     align-items: center;
     cursor: pointer;
     margin-bottom: 36px;
@@ -38,46 +39,51 @@ const StyledNavItem = styled.div`
 `
 
 
-
 export default class NavItem extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isActive: false
+      isActive: false,
     }
   }
+
   toggleActive = (e) => {
     e.preventDefault()
     this.setState({
-      isActive: !this.state.isActive
-    }) 
+      isActive: !this.state.isActive,
+    })
   }
+
   toggleActiveDefault = () => {
     this.setState({
-      isActive: !this.state.isActive
-    }) 
+      isActive: !this.state.isActive,
+    })
   }
+
   render() {
     return (
       <StyledNavItem>
-        <a href="#" className="title" onClick={ this.toggleActive }>
-          <p>{ this.props.title.toUpperCase() }</p>
+        <a href="#" className="title" onClick={this.toggleActive}>
+          <p>{this.props.title.toUpperCase()}</p>
           <img
-            style={this.state.isActive ? {transform: 'rotate(180deg)'} : null}
-            src={toggleImg} className="toggle" alt=""/>
+            style={this.state.isActive ? { transform: 'rotate(180deg)' } : null}
+            src={toggleImg}
+            className="toggle"
+            alt=""
+          />
         </a>
-        {(this.state.isActive && this.props.options) ? 
-          (<div className="options">
-            {this.props.options.map((el, idx) => {
-              return (
-                <Link key={idx}
-                      className="option"
-                      onClick={ this.toggleActiveDefault }
-                      to={ `/products/${this.props.title}/${el}` }>
-                      {el.toUpperCase()}
-                </Link>
-              )
-          })} 
+        {(this.state.isActive && this.props.options) ? (
+          <div className="options">
+            {this.props.options.map((el) => (
+              <Link
+                key={el}
+                className="option"
+                onClick={this.toggleActiveDefault}
+                to={`/products/${this.props.title}/${el}`}
+              >
+                {el.toUpperCase()}
+              </Link>
+            ))}
           </div>) : null
         }
       </StyledNavItem>

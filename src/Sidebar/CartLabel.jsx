@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { White } from '../style'
 
+
 const WhiteHover = White.extend`
   text-decoration: none;
   text-align: center;
@@ -12,27 +13,28 @@ const WhiteHover = White.extend`
   }
 `
 
-const CartLabel = props =>
+const CartLabel = (props) => (
   <div>
     <White>
       {props.count} items, ${props.total} in total
     </White>
-    <Link to="/cart" style={{
-      color: '#fff',
-      textDecoration: 'none'
-    }}  ><WhiteHover>Cart</WhiteHover></Link>
+    <Link
+      to="/cart"
+      style={{
+        color: '#fff',
+        textDecoration: 'none',
+      }}
+    >
+      <WhiteHover>Cart</WhiteHover>
+    </Link>
   </div>
-
-const mapStateToProps = state => ({
+)
+const mapStateToProps = (state) => ({
   count: Object.values(state.cart.quantityById)
-                  .reduce((a, v) => a + (v || 0), 0),
-  total: state.cart.addedIds.map((v, i) => {
-    return v.cost * state.cart.quantityById[v.productId]
-  }).reduce((a, v) => a + v, 0)
+    .reduce((a, v) => a + (v || 0), 0),
+  total: state.cart.addedIds.map((v) => (
+    v.cost * state.cart.quantityById[v.productId]
+  )).reduce((a, v) => a + v, 0),
 })
 
-const mapDispatchToProps = dispatch => ({
-
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartLabel)
+export default connect(mapStateToProps)(CartLabel)

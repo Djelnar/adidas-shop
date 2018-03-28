@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Gallery from './Gallery.jsx'
-import { get, imageLink } from './../Api'
 import { connect } from 'react-redux'
 import cartAdd from '../actions/cartAdd'
 import getItem from '../actions/getItem'
+import Gallery from './Gallery.jsx'
 import { Loading } from './../style'
+/* eslint-disable no-magic-numbers */
 
 
 const Item = styled.div`
@@ -62,18 +62,6 @@ const Item = styled.div`
 `
 
 class Show extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  fetchData(props) {
-    const { group, type, id } = props.match.params
-
-    if (id !== this.props.match.params.id) {
-      this.props.onFetchItem(group, type, id)
-    }
-  }
-
   componentDidMount() {
     this.fetchData(this.props)
     const { group, type, id } = this.props.match.params
@@ -85,8 +73,16 @@ class Show extends Component {
     this.fetchData(nextProps)
   }
 
-  shouldComponentUpdate(np, ns) {
+  shouldComponentUpdate(np) {
     return np.product.id !== this.props.product.id
+  }
+
+  fetchData(props) {
+    const { group, type, id } = props.match.params
+
+    if (id !== this.props.match.params.id) {
+      this.props.dispatch(getItem(group, type, id))
+    }
   }
 
   renderItem() {
@@ -100,6 +96,8 @@ class Show extends Component {
     }
     const { group, type, id } = this.props.match.params
 
+    const { dispatch } = this.props
+
     return (
       <Item>
         <Gallery images={this.props.images} />
@@ -107,7 +105,7 @@ class Show extends Component {
         <p className="price" >{newPrice} {currency}</p>
         <p className="desc" >{description}</p>
         <button
-          onClick={(_) => this.props.onAdd(`/products/${group}/${type}/${id}`, title, newPrice)}
+          onClick={() => dispatch(cartAdd(`/products/${group}/${type}/${id}`, title, newPrice))}
           className="buybtn"
         >add to cart
         </button>
@@ -121,8 +119,8 @@ class Show extends Component {
     return (
       <div>
         {(isError || isFetching)
-        ? <Loading>Loading...</Loading>
-        : this.renderItem() }
+          ? <Loading>Loading...</Loading>
+          : this.renderItem()}
       </div>
     )
   }
@@ -135,13 +133,5 @@ const mapStateToProps = (store) => ({
   images: store.getItem.images,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  onFetchItem: (group, type, id) => {
-    dispatch(getItem(group, type, id))
-  },
-  onAdd: (productId, title, cost) => {
-    dispatch(cartAdd(productId, title, cost))
-  },
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Show)
+export default connect(mapStateToProps)(Show)

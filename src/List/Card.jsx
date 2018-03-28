@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 import cartAdd from '../actions/cartAdd'
 import { WhiteButton } from '../style'
 
+
 const StyledCard = styled.div`
-  background-color: ${props => props.bgc || '#fff'};
+  background-color: ${(props) => props.bgc || '#fff'};
   padding: 0 10px 10px;
   font-family: 'Roboto', sans-serif;
   font-stretch: condensed;
@@ -38,22 +39,24 @@ const PriceLink = styled(Link)`
   }
 `
 
-const Card = props => 
-  <StyledCard bgc="#f4f4f4" >
-    <h2 className="title" >{props.title}</h2>
-    <img src={props.pic} alt="" />
-    <PriceLink to={props.to} >${props.price}</PriceLink>
-    <WhiteButton
-      onClick={_ => { props.onAdd(props.to, props.title, props.price) }}
-    >add to cart</WhiteButton>
-  </StyledCard>
+const Card = (props) => (<StyledCard bgc="#f4f4f4" >
+  <h2 className="title" >{props.title}</h2>
+  <img src={props.pic} alt="" />
+  <PriceLink to={props.to} >${props.price}</PriceLink>
+  <WhiteButton
+    onClick={(_) => {
+ props.onAdd(props.to, props.title, props.price)
+}}
+  >add to cart
+  </WhiteButton>
+</StyledCard>)
 
-const mapStateToProps = state => ({})
+const mapStateToProps = (state) => ({})
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   onAdd: (productId, title, cost) => {
     dispatch(cartAdd(productId, title, cost))
-  }
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card)

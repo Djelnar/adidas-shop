@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Loading } from './../style'
+/*  eslint-disable no-magic-numbers */
+
 
 const GalleryDiv = styled.div`
   margin-top: 10vh;
@@ -47,57 +48,49 @@ const PlaceholdImg = styled.div`
 `
 
 export default class Gallery extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      pics: [],
-      shown: ''
-    }
+  state = {
+    shown: '',
   }
-  componentDidMount() {
+
+  changeView = (e) => {
     this.setState({
-      pics: this.props.images,
-      shown: this.props.images[0]
+      shown: this.props.pics[e.target.dataset.id],
     })
   }
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      pics: nextProps.images,
-      shown: nextProps.images[0]
-    })
-  }
-  changeView = e => {
-    this.setState({
-      shown: this.state.pics[e.target.dataset.id]
-    })
-  }
+
   render() {
-    const { shown, pics } = this.state || null
-    const pre = [...Array(10).keys()]
+    const { shown } = this.state
+    const { pics } = this.props
+    const pre = [...new Array(10).keys()]
+
     return (
       <GalleryDiv>
         <div className="mainview">
-          { shown ? <img src={ shown.slice(0, -3) + 960 } alt=""/> : <PlaceholdImg /> }
+          {shown ? <img src={shown.slice(0, -3) + 960} alt="" /> : <PlaceholdImg />}
         </div>
         <ScrollH>
-        <div className="imagelist">
-          { pics.length ?
-          (pics.map((el, idx) => {
-            return(
-              <div key={idx} className="item">
-                <img src={el} onClick={this.changeView} data-id={idx} alt=""/>
-              </div>
-            )
-          })) :
-          (
-            pre.map(el => 
-              <div key={el} className="item">
-                <PlaceholdImg />
-              </div>
-            )
-          )
-          }
-        </div>
+          <div className="imagelist">
+            {pics.length
+              ? (pics.map((el, idx) => (
+                <div key={el} className="item">
+                  <img
+                    src={el}
+                    onClick={this.changeView}
+                    data-id={idx}
+                    alt=""
+                    role='none'
+                  />
+                </div>
+              )))
+              : (
+                pre.map((el) => (
+                  <div key={el} className="item">
+                    <PlaceholdImg />
+                  </div>
+                ))
+              )
+            }
+          </div>
         </ScrollH>
       </GalleryDiv>
     )

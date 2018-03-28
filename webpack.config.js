@@ -34,14 +34,4 @@ module.exports = {
     ],
   },
   devtool: 'source-map',
-  devServer: {
-    contentBase: path.join(__dirname, 'src'),
-    compress: true,
-    historyApiFallback: true,
-    proxy: {
-      '/login': 'http://localhost:3525',
-      '/checkhour': 'http://localhost:3525',
-      '/trycheckout': 'http://localhost:3525',
-    },
-  },
 }

@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server --inline --open",
     "build": "webpack -p --mode production",
     "start": "node server.js",
-    "lint": "eslint --fix webpack.config.js server.js src"
+    "lint": "eslint --fix --ext .js --ext .jsx webpack.config.js server.js src"
   },
   "author": "",
   "license": "ISC",
@@ -29,8 +29,7 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
     "styled-components": "^3.2.0",
-    "webpack": "^4.1.0",
-    "webpack-dev-server": "^3.1.0"
+    "webpack": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
